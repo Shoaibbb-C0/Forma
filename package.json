@@ -6,11 +6,11 @@
     "node": ">=22.13.0"
   },
   "scripts": {
-    "dev": "vinext dev",
-    "build": "vinext build",
+    "dev": "node ./node_modules/vinext/dist/cli.js dev",
+    "build": "node ./node_modules/vinext/dist/cli.js build",
     "start": "wrangler dev --config dist/server/wrangler.json",
-    "lint": "oxlint",
-    "format": "oxfmt",
+    "lint": "node ./node_modules/oxlint/bin/oxlint",
+    "format": "node ./node_modules/oxfmt/bin/oxfmt",
     "db:generate": "drizzle-kit generate"
   },
   "dependencies": {

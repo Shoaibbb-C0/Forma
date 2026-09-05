@@ -1,3 +1,95 @@
-import { editor,sameOrigin,rateLimit,readBody,str } from '@/lib/security';
-import { database } from '@/lib/db';
-export async function POST(request:Request){if(!sameOrigin(request)||!await editor())return Response.json({error:'Editor access required.'},{status:403});try{if(!await rateLimit(request,'editor',100))return Response.json({error:'Please wait before making more changes.'},{status:429});const d=await readBody(request);const id=str(d.id,1,80,'ID'),kind=str(d.kind,1,20,'Type'),slug=str(d.slug,1,100,'Slug'),title=str(d.title,2,180,'Title'),category=str(d.category,2,80,'Category'),summary=str(d.summary,10,400,'Summary'),image=str(d.image,10,500,'Image URL'),alt=str(d.alt,5,250,'Image description');if(!['project','article'].includes(kind)||!['draft','published'].includes(d.status)||!/^([a-z0-9]+-)*[a-z0-9]+$/.test(slug))throw new Error('Invalid type, status or slug.');const url=new URL(image);if(url.protocol!=='https:'||url.hostname!=='images.unsplash.com'||url.search||url.hash)throw new Error('Use an Unsplash image URL without query parameters.');if(!Array.isArray(d.body)||!d.body.length||d.body.length>15)throw new Error('Add between 1 and 15 story sections.');const body=d.body.map((x:any)=>({heading:str(x.heading,2,100,'Section heading'),text:str(x.text,10,8000,'Section text')}));if(kind==='project'&&d.status==='published'&&!['Context','Challenge','Design response','Spatial approach','Intended experience'].every(h=>body.some((s:any)=>s.heading===h)))throw new Error('Published projects need all five story sections: Context, Challenge, Design response, Spatial approach, Intended experience.');await database().prepare('INSERT INTO content (id,kind,slug,title,category,summary,image,alt,body,status,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET kind=excluded.kind,slug=excluded.slug,title=excluded.title,category=excluded.category,summary=excluded.summary,image=excluded.image,alt=excluded.alt,body=excluded.body,status=excluded.status,updated_at=excluded.updated_at').bind(id,kind,slug,title,category,summary,image,alt,JSON.stringify(body),d.status,new Date().toISOString()).run();return Response.json({ok:true})}catch(e){const message=e instanceof Error?e.message:'';return Response.json({error:/UNIQUE/.test(message)?'That slug is already in use. Choose another.':/must contain|Invalid|Use an Unsplash|story sections|Published projects/.test(message)?message:'Content could not be saved. Check the fields and retry.'},{status:400})}}
+import {
+  editor,
+  sameOrigin,
+  rateLimit,
+  readBody,
+  str,
+} from '@/src/server/http/request-security';
+import { database } from '@/src/server/database/content-repository';
+export async function POST(request: Request) {
+  if (!sameOrigin(request) || !(await editor()))
+    return Response.json({ error: 'Editor access required.' }, { status: 403 });
+  try {
+    if (!(await rateLimit(request, 'editor', 100)))
+      return Response.json(
+        { error: 'Please wait before making more changes.' },
+        { status: 429 },
+      );
+    const d = await readBody(request);
+    const id = str(d.id, 1, 80, 'ID'),
+      kind = str(d.kind, 1, 20, 'Type'),
+      slug = str(d.slug, 1, 100, 'Slug'),
+      title = str(d.title, 2, 180, 'Title'),
+      category = str(d.category, 2, 80, 'Category'),
+      summary = str(d.summary, 10, 400, 'Summary'),
+      image = str(d.image, 10, 500, 'Image URL'),
+      alt = str(d.alt, 5, 250, 'Image description');
+    if (
+      !['project', 'article'].includes(kind) ||
+      !['draft', 'published'].includes(d.status) ||
+      !/^([a-z0-9]+-)*[a-z0-9]+$/.test(slug)
+    )
+      throw new Error('Invalid type, status or slug.');
+    const url = new URL(image);
+    if (
+      url.protocol !== 'https:' ||
+      url.hostname !== 'images.unsplash.com' ||
+      url.search ||
+      url.hash
+    )
+      throw new Error('Use an Unsplash image URL without query parameters.');
+    if (!Array.isArray(d.body) || !d.body.length || d.body.length > 15)
+      throw new Error('Add between 1 and 15 story sections.');
+    const body = d.body.map((x: any) => ({
+      heading: str(x.heading, 2, 100, 'Section heading'),
+      text: str(x.text, 10, 8000, 'Section text'),
+    }));
+    if (
+      kind === 'project' &&
+      d.status === 'published' &&
+      ![
+        'Context',
+        'Challenge',
+        'Design response',
+        'Spatial approach',
+        'Intended experience',
+      ].every((h) => body.some((s: any) => s.heading === h))
+    )
+      throw new Error(
+        'Published projects need all five story sections: Context, Challenge, Design response, Spatial approach, Intended experience.',
+      );
+    await database()
+      .prepare(
+        'INSERT INTO content (id,kind,slug,title,category,summary,image,alt,body,status,updated_at) VALUES (?,?,?,?,?,?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET kind=excluded.kind,slug=excluded.slug,title=excluded.title,category=excluded.category,summary=excluded.summary,image=excluded.image,alt=excluded.alt,body=excluded.body,status=excluded.status,updated_at=excluded.updated_at',
+      )
+      .bind(
+        id,
+        kind,
+        slug,
+        title,
+        category,
+        summary,
+        image,
+        alt,
+        JSON.stringify(body),
+        d.status,
+        new Date().toISOString(),
+      )
+      .run();
+    return Response.json({ ok: true });
+  } catch (e) {
+    const message = e instanceof Error ? e.message : '';
+    return Response.json(
+      {
+        error: /UNIQUE/.test(message)
+          ? 'That slug is already in use. Choose another.'
+          : /must contain|Invalid|Use an Unsplash|story sections|Published projects/.test(
+                message,
+              )
+            ? message
+            : 'Content could not be saved. Check the fields and retry.',
+      },
+      { status: 400 },
+    );
+  }
+}

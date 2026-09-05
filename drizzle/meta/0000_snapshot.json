@@ -88,17 +88,12 @@
       "indexes": {
         "content_slug_unique": {
           "name": "content_slug_unique",
-          "columns": [
-            "slug"
-          ],
+          "columns": ["slug"],
           "isUnique": true
         },
         "idx_content_status_kind": {
           "name": "idx_content_status_kind",
-          "columns": [
-            "status",
-            "kind"
-          ],
+          "columns": ["status", "kind"],
           "isUnique": false
         }
       },

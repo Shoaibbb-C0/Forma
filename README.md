@@ -1,10 +1,44 @@
-# Operations
-Private development deployment is owner-only. Studio Editor uses ChatGPT sign-in and server-side EDITOR_EMAILS allowlist. Configure this secret through Sites; never commit .env. No passwords are stored by the app.
+# Forma
 
-Public launch requires studio verification of all concept copy, reference photography, contact workflow and service availability. Change the private-development robots policy only when publishing publicly. No email notifications are configured: enquiries are saved in the private inbox for review.
+Forma is an editorial architecture and interiors studio website with a server-rendered portfolio, journal, protected studio CMS, and private enquiry inbox.
 
-Content: use /editor, create or edit a study/article, save draft or select published and save. Project publishing requires the five story headings. Unpublish by saving as draft. Inbox statuses are new, read and archived. Archived enquiries remain recoverable through the status selector.
+## Project structure
 
-Schema changes: edit db/schema.ts, generate a new Drizzle migration, inspect SQL, then build and publish. Applied migration files are immutable. Reference images use approved images.unsplash.com URLs without query parameters.
+```text
+app/                         Framework routes, metadata, and API boundaries
+  api/                       Thin HTTP endpoints for editor and enquiry flows
+  work/ journal/             Public content routes
+  editor/                    Protected CMS route
+src/
+  components/                Shared site, form, and UI primitives
+  content/                   Initial project and journal content
+  features/                  Enquiry and CMS client features
+  lib/                       Shared utility functions
+  server/
+    database/                D1 repository and Drizzle schema
+    http/                    Request validation, authorization, rate limits
+docs/                        Product brief, data model, architecture, design, QA
+drizzle/                     Immutable D1 migration history
+public/                      Static public assets
+```
 
-Local development uses the Sites test identity seedy@sites.test. Temporarily include it only in the ignored local .env EDITOR_EMAILS to test the editor. Hosted allowlist remains the studio owner's configured email.
+## Local development
+
+```bash
+npm run dev
+npm run build
+npm run lint
+npm run db:generate
+```
+
+The development server uses the Sites local identity. To access the editor locally, temporarily include the local test email in `.env`; never commit `.env`.
+
+## Content and operations
+
+- Public projects and journal articles are read from D1.
+- `/editor` requires ChatGPT sign-in and an `EDITOR_EMAILS` server allowlist.
+- Content can be saved as a draft or published. Draft content stays private.
+- Enquiries are validated, rate-limited, stored in D1, and viewable only in the editor inbox.
+- Reference imagery must use the approved Unsplash source pattern enforced by the editor endpoint.
+
+Read [docs/architecture.md](docs/architecture.md), [docs/data-model.md](docs/data-model.md), and [docs/acceptance.md](docs/acceptance.md) before changing infrastructure or persistent data.
