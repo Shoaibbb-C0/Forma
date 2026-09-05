@@ -1,5 +1,5 @@
-import { Photo, CTA } from '@/src/components/site/site-sections';
-import { getContent } from '@/src/server/database/content-repository';
+import { Photo, CTA } from '@/frontend/components/site/site-sections';
+import { getContent } from '@/backend/database/content-repository';
 import { notFound } from 'next/navigation';
 export const dynamic = 'force-dynamic';
 export async function generateMetadata({

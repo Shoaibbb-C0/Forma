@@ -5,7 +5,7 @@ import {
   SelectValue,
   SelectContent,
   SelectItem,
-} from '@/src/components/ui/select';
+} from '@/frontend/components/ui/select';
 export default function Choice({
   name,
   label,

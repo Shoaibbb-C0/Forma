@@ -1,4 +1,4 @@
-import EnquiryForm from '@/src/features/enquiries/components/enquiry-form';
+import EnquiryForm from '@/frontend/features/enquiries/components/enquiry-form';
 export const metadata = {
   title: 'Enquire',
   description: 'Tell Forma about your architecture or interior design project.',

@@ -1,5 +1,5 @@
 import { env } from 'cloudflare:workers';
-import { Content, seedContent } from '@/src/content/seed-content';
+import { Content, seedContent } from '@/frontend/content/seed-content';
 export function database(): D1Database {
   return (env as unknown as { DB: D1Database }).DB;
 }

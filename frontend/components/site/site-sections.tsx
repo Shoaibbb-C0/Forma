@@ -1,5 +1,5 @@
 import Navigation from './navigation';
-import { Content } from '@/src/content/seed-content';
+import { Content } from '@/frontend/content/seed-content';
 export function Header() {
   return (
     <header className="header wrap">

@@ -1,4 +1,4 @@
-import { Skeleton } from '@/src/components/ui/skeleton';
+import { Skeleton } from '@/frontend/components/ui/skeleton';
 export default function Loading() {
   return (
     <main id="main" className="wrap page-head" aria-busy="true">

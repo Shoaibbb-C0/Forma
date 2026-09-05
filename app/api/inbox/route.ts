@@ -2,8 +2,8 @@ import {
   editor,
   sameOrigin,
   readBody,
-} from '@/src/server/http/request-security';
-import { database } from '@/src/server/database/content-repository';
+} from '@/backend/http/request-security';
+import { database } from '@/backend/database/content-repository';
 export async function POST(request: Request) {
   if (!sameOrigin(request) || !(await editor()))
     return Response.json({ error: 'Editor access required.' }, { status: 403 });

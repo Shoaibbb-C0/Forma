@@ -1,5 +1,5 @@
 import { getChatGPTUser } from '@/app/chatgpt-auth';
-import { runtime, database } from '@/src/server/database/content-repository';
+import { runtime, database } from '@/backend/database/content-repository';
 export async function editor() {
   const user = await getChatGPTUser();
   if (!user) return null;

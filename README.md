@@ -9,14 +9,14 @@ app/                         Framework routes, metadata, and API boundaries
   api/                       Thin HTTP endpoints for editor and enquiry flows
   work/ journal/             Public content routes
   editor/                    Protected CMS route
-src/
+frontend/
   components/                Shared site, form, and UI primitives
   content/                   Initial project and journal content
   features/                  Enquiry and CMS client features
   lib/                       Shared utility functions
-  server/
-    database/                D1 repository and Drizzle schema
-    http/                    Request validation, authorization, rate limits
+backend/
+  database/                  D1 repository and Drizzle schema
+  http/                      Request validation, authorization, rate limits
 docs/                        Product brief, data model, architecture, design, QA
 drizzle/                     Immutable D1 migration history
 public/                      Static public assets

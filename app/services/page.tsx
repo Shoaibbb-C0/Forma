@@ -1,4 +1,4 @@
-import { CTA } from '@/src/components/site/site-sections';
+import { CTA } from '@/frontend/components/site/site-sections';
 export const metadata = {
   title: 'Services',
   description:

@@ -1,5 +1,5 @@
-import { CTA, Photo } from '@/src/components/site/site-sections';
-import { photos } from '@/src/content/seed-content';
+import { CTA, Photo } from '@/frontend/components/site/site-sections';
+import { photos } from '@/frontend/content/seed-content';
 export const metadata = {
   title: 'Studio',
   description:

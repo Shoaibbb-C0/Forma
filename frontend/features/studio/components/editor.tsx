@@ -1,13 +1,13 @@
 'use client';
 import { useState } from 'react';
-import { Content, photos } from '@/src/content/seed-content';
+import { Content, photos } from '@/frontend/content/seed-content';
 import {
   Tabs,
   TabsList,
   TabsTrigger,
   TabsContent,
-} from '@/src/components/ui/tabs';
-import Choice from '@/src/components/forms/choice';
+} from '@/frontend/components/ui/tabs';
+import Choice from '@/frontend/components/forms/choice';
 type Enquiry = {
   id: string;
   name: string;

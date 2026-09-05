@@ -1,10 +1,10 @@
-import { database } from '@/src/server/database/content-repository';
+import { database } from '@/backend/database/content-repository';
 import {
   sameOrigin,
   rateLimit,
   readBody,
   str,
-} from '@/src/server/http/request-security';
+} from '@/backend/http/request-security';
 export async function POST(request: Request) {
   if (!sameOrigin(request))
     return Response.json(

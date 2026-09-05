@@ -1,4 +1,4 @@
-import { listContent } from '@/src/server/database/content-repository';
+import { listContent } from '@/backend/database/content-repository';
 const origin = 'https://forma-spatial-studio.shaikhshoaib26149.chatgpt.site';
 export default async function sitemap() {
   return [

@@ -1,10 +1,10 @@
 import { requireChatGPTUser } from '@/app/chatgpt-auth';
-import { editor } from '@/src/server/http/request-security';
+import { editor } from '@/backend/http/request-security';
 import {
   listContent,
   database,
-} from '@/src/server/database/content-repository';
-import Editor from '@/src/features/studio/components/editor';
+} from '@/backend/database/content-repository';
+import Editor from '@/frontend/features/studio/components/editor';
 export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'Studio Editor',

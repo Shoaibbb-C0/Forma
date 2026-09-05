@@ -1,5 +1,5 @@
-import { Photo } from '@/src/components/site/site-sections';
-import { listContent } from '@/src/server/database/content-repository';
+import { Photo } from '@/frontend/components/site/site-sections';
+import { listContent } from '@/backend/database/content-repository';
 export const dynamic = 'force-dynamic';
 export const metadata = {
   title: 'Journal',

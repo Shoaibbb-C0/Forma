@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import Choice from '@/src/components/forms/choice';
+import Choice from '@/frontend/components/forms/choice';
 export default function EnquiryForm() {
   const [service, setService] = useState('Residential architecture');
   const [budget, setBudget] = useState('To be discussed');
