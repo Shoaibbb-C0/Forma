@@ -1,0 +1,3 @@
+'use client';
+import { Select,SelectTrigger,SelectValue,SelectContent,SelectItem } from '@/components/ui/select';
+export default function Choice({name,label,values,value,onChange}:{name:string;label:string;values:string[];value:string;onChange:(v:string)=>void}){return <div className="field"><label id={`${name}-label`}>{label}</label><Select name={name} value={value} onValueChange={v=>onChange(v??'')}><SelectTrigger aria-labelledby={`${name}-label`} className="select-control !w-full !h-auto !rounded-none !p-3"><SelectValue/></SelectTrigger><SelectContent>{values.map(v=><SelectItem value={v} key={v}>{v}</SelectItem>)}</SelectContent></Select></div>}
