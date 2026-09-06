@@ -13,13 +13,6 @@ export default function Navbar() {
         Forma<sup>®</sup>
       </Link>
 
-      <div className="nav-signature" aria-label="Forma studio principle">
-        <span aria-hidden="true" />
-        <p>
-          Spaces with <em>staying power.</em>
-        </p>
-      </div>
-
       <button
         className="menu"
         type="button"
