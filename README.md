@@ -1,21 +1,149 @@
-# Forma
+# Forma — Architecture Studio Website
 
-An image-led architecture and design-practice portfolio, built as a MERN demo with a React/Vite client and Express/Mongo API.
+A responsive, image-led portfolio for a fictional architecture and design practice.
 
-## Run locally
+Forma was created as an agency portfolio project to demonstrate premium web design, editorial typography, responsive development, purposeful motion, project storytelling, Express API development, form validation, and production deployment.
 
-1. Copy `.env.example` to `.env` and fill variables as needed.
-2. Run `npm install`, then `npm install --prefix client` and `npm install --prefix server`.
-3. Run `npm run dev`.
+## Live website
 
-The site runs at the URL Vite displays (usually `http://localhost:5173`); the API runs on port 5000. Without `MONGODB_URI`, the public site still runs and successful enquiry submissions are logged only. Set MongoDB to retain enquiries.
+[View Forma on Vercel](https://forma-beta-two.vercel.app/)
 
-## CMS/content workflow
+## Features
 
-Project and article content is deliberately kept in the client seed collection for the visual demo. The Express service is prepared for MongoDB persistence and safe form handling. For production, move the `projects` and `articles` collections from `client/src/main.jsx` into Mongo models and expose public read plus `ADMIN_API_KEY`-protected editor endpoints. This keeps editorial content separate from presentation while retaining the chosen MERN stack.
+- Art-directed architecture portfolio
+- Six residential and commercial projects
+- Project filtering and individual case-study routes
+- Dedicated services, studio, journal, article, contact, and 404 pages
+- Responsive navigation and touch-friendly mobile menu
+- Accessible enquiry form with loading, success, and error feedback
+- Express API with server validation, rate limiting, and spam protection
+- Optional MongoDB enquiry storage
+- Purposeful GSAP hero animation
+- Reduced-motion support
+- Responsive layouts from 320px to large desktop screens
+- Locally stored, licensed Unsplash photography
+- Vercel frontend and backend deployment support
 
-## Deployment
+## Technology
 
-Deploy `client` to Vercel or Netlify and `server` to Render/Railway. Set `VITE_API_URL` to the deployed API URL, and set `CLIENT_ORIGIN`, `MONGODB_URI`, and `ADMIN_API_KEY` on the server.
+### Frontend
 
-See [ARCHITECTURE.md](ARCHITECTURE.md) for the experience and implementation blueprint, and [brand-assets/README.md](brand-assets/README.md) for brand and asset guidance.
+- React
+- Vite
+- React Router
+- GSAP
+- CSS
+- JavaScript
+
+### Backend
+
+- Node.js
+- Express
+- Express Rate Limit
+- Mongoose
+- Optional MongoDB persistence
+
+### Deployment
+
+- Vercel
+- GitHub
+
+## Project structure
+
+```text
+Forma/
+├── client/
+│   ├── public/assets/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── data/
+│   │   ├── pages/
+│   │   ├── main.jsx
+│   │   └── styles.css
+│   └── vercel.json
+├── server/
+│   ├── models/
+│   ├── routes/
+│   ├── index.js
+│   └── server.js
+├── brand-assets/
+├── ARCHITECTURE.md
+└── README.md
+```
+
+## Local development
+
+Install the root, frontend, and backend dependencies:
+
+```bash
+npm install
+npm install --prefix client
+npm install --prefix server
+```
+
+Create `client/.env`:
+
+```env
+VITE_API_URL=http://localhost:5000/api
+```
+
+Create `server/.env`:
+
+```env
+PORT=5000
+CLIENT_ORIGIN=http://localhost:5173
+```
+
+Start both applications:
+
+```bash
+npm run dev
+```
+
+The frontend normally runs at `http://localhost:5173` and the API runs at `http://localhost:5000`.
+
+The API health endpoint is available at `http://localhost:5000/api/health`.
+
+## Deployment environment variables
+
+Set these values in the corresponding Vercel project settings.
+
+Frontend:
+
+```env
+VITE_API_URL=https://your-backend-domain.vercel.app/api
+```
+
+Backend:
+
+```env
+CLIENT_ORIGIN=https://your-frontend-domain.vercel.app
+```
+
+MongoDB is optional for this portfolio demo. Add `MONGODB_URI` only when persistent enquiry storage is required.
+
+Local environment files are ignored by Git and must never be committed.
+
+## Enquiry behavior
+
+The enquiry form validates submissions in the browser and on the server. It includes rate limiting and a hidden spam field.
+
+Without MongoDB, accepted enquiries are logged by the backend but are not permanently stored. A transactional email provider can be connected later for production enquiry delivery.
+
+## Content management
+
+Portfolio projects and journal articles are stored in `client/src/data/content.js`. Shared interface elements are in `client/src/components`, and individual routes are in `client/src/pages`.
+
+This keeps demonstration content separate from the presentation layer and makes a future CMS migration straightforward.
+
+## Design direction
+
+Forma uses warm neutral surfaces, muted green accents, editorial serif display typography, precise sans-serif interface typography, asymmetric project layouts, large-format photography, controlled transitions, and generous negative space.
+
+## Image licensing
+
+The demonstration photography was downloaded from Unsplash and is used under the Unsplash License. Asset information and brand guidance are documented in `brand-assets/README.md`.
+
+## Project status
+
+Forma is complete as an agency portfolio demonstration. MongoDB, a visual content-management interface, and transactional email delivery can be added if the project is extended into a live architecture-practice website.
