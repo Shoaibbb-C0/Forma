@@ -1,10 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
 :root {
-  --paper: #ebe8df;
-  --ink: #18201d;
-  --moss: #43544a;
-  --soft: #dcd8cf;
-  --line: rgba(24, 32, 29, 0.24);
+  --paper: #f5f5f5;
+  --ink: #111311;
+  --moss: #56635d;
+  --soft: var(--paper);
+  --line: rgba(17, 19, 17, 0.18);
   --serif: "Cormorant Garamond", Georgia, serif;
   --sans: Manrope, Arial, sans-serif;
   --mono: "DM Mono", monospace;
@@ -99,7 +99,7 @@ header {
   grid-template-columns: 1fr auto;
   align-items: center;
   gap: 3vw;
-  background: rgba(235, 232, 223, 0.94);
+  background: rgba(245, 245, 245, 0.94);
   border-bottom: 1px solid var(--line);
   backdrop-filter: blur(12px);
 }
@@ -229,8 +229,8 @@ nav a.active:after {
   display: flex;
   justify-content: space-between;
   align-items: end;
-  background: linear-gradient(transparent, rgba(10, 14, 12, 0.72));
-  color: white;
+  background: linear-gradient(transparent, rgba(17, 19, 17, 0.72));
+  color: var(--paper);
   font: 400 9px var(--mono);
   text-transform: uppercase;
 }
@@ -430,13 +430,13 @@ nav a.active:after {
   justify-content: space-between;
   align-items: center;
   padding: 1.2vw 0;
-  border-top: 1px solid rgba(235, 232, 223, 0.34);
+  border-top: 1px solid rgba(245, 245, 245, 0.34);
   font: 500 clamp(52px, 8vw, 120px)/0.9 var(--serif);
   letter-spacing: -0.055em;
   transition: padding 0.4s var(--ease);
 }
 .services-band h2 a:last-child {
-  border-bottom: 1px solid rgba(235, 232, 223, 0.34);
+  border-bottom: 1px solid rgba(245, 245, 245, 0.34);
 }
 .services-band h2 a:hover {
   padding-left: 2vw;
@@ -742,7 +742,7 @@ nav a.active:after {
 }
 .contact input::placeholder,
 .contact textarea::placeholder {
-  color: rgba(24, 32, 29, 0.46);
+  color: rgba(17, 19, 17, 0.46);
 }
 .honeypot {
   position: absolute;
@@ -800,7 +800,8 @@ footer {
 }
 .footer-lead em {
   font-weight: 400;
-  color: #92a198;
+  color: var(--paper);
+  opacity: 0.62;
 }
 .footer-arrow {
   font-size: clamp(65px, 9vw, 125px);
@@ -811,7 +812,7 @@ footer {
   display: grid;
   grid-template-columns: 2fr repeat(3, 1fr);
   gap: 3vw;
-  border-top: 1px solid rgba(235, 232, 223, 0.3);
+  border-top: 1px solid rgba(245, 245, 245, 0.3);
 }
 .footer-grid small,
 .footer-bottom {
@@ -828,7 +829,7 @@ footer {
   padding-top: 1.4vw;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid rgba(235, 232, 223, 0.3);
+  border-top: 1px solid rgba(245, 245, 245, 0.3);
 }
 @media (max-width: 900px) {
   header {

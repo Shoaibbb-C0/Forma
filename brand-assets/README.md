@@ -8,9 +8,9 @@
 
 ## Palette
 
-- Paper — `#E9E5DC`
-- Ink — `#17201D`
-- Moss — `#425449`
+- Paper / 60% — `#F5F5F5`
+- Slate / 30% — `#56635D`
+- Ink / 10% — `#111311`
 
 ## Typography
 
