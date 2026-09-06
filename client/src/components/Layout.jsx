@@ -1,39 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link, NavLink, useLocation } from "react-router-dom";
-
-export function Header() {
-  const [open, setOpen] = useState(false);
-  const { pathname } = useLocation();
-  useEffect(() => setOpen(false), [pathname]);
-  return (
-    <header>
-      <Link className="logo" to="/" aria-label="Forma home">
-        Forma<sup>®</sup>
-      </Link>
-      <p className="nav-specialty">
-        Architecture
-        <br />& design practice
-      </p>
-      <button
-        className="menu"
-        onClick={() => setOpen(!open)}
-        aria-expanded={open}
-        aria-controls="nav"
-      >
-        {open ? "Close ×" : "Menu +"}
-      </button>
-      <nav id="nav" className={open ? "open" : ""}>
-        <NavLink to="/work">Work</NavLink>
-        <NavLink to="/services">Services</NavLink>
-        <NavLink to="/studio">Studio</NavLink>
-        <NavLink to="/journal">Journal</NavLink>
-        <NavLink className="nav-contact" to="/contact">
-          Start a project ↗
-        </NavLink>
-      </nav>
-    </header>
-  );
-}
+import React from "react";
+import { Link } from "react-router-dom";
 export function Footer() {
   return (
     <footer>
