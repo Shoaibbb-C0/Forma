@@ -916,12 +916,24 @@ footer {
     min-height: 285px;
     margin: 0 0 0 auto;
   }
+  .hero-caption {
+    padding: 34px 12px 11px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    line-height: 1.35;
+  }
+  .hero-caption b {
+    font-size: 11px;
+  }
   .hero-note {
-    position: relative;
-    z-index: 3;
-    width: 60%;
-    margin: -54px 0 90px;
+    width: min(78%, 310px);
+    max-width: none;
+    margin: 22px 0 104px;
+    padding-top: 14px;
+    border-top: 1px solid var(--line);
     font-size: 13px;
+    line-height: 1.55;
   }
   .hero-arrow {
     left: 18px;
@@ -1194,6 +1206,9 @@ footer {
   }
   .hero-image {
     width: 78%;
+  }
+  .hero-note {
+    width: 82%;
   }
   .statement h2,
   .section-head h2,
