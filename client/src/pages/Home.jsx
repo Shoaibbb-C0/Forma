@@ -32,12 +32,12 @@ export default function Home() {
     const context = gsap.context(() => {
       gsap.timeline({ defaults: { ease: "power4.out" } })
         .from(".hero-word > span", { yPercent: 110, duration: 1.15, stagger: 0.1 })
-        .from(".forma-hero-media", { clipPath: "inset(100% 0 0 0)", duration: 1.2 }, 0.2)
+        .from(".forma-hero-media", { y: 30, duration: 1 }, 0.2)
         .from(".hero-detail, .hero-index, .hero-scroll", { y: 12, opacity: 0, duration: 0.7, stagger: 0.08 }, 0.65);
       gsap.to(".hero-word--arch", { yPercent: -14, ease: "none", scrollTrigger: { trigger: ".forma-hero", start: "top top", end: "bottom top", scrub: 0.7 } });
       gsap.to(".forma-hero-media img", { scale: 1.08, ease: "none", scrollTrigger: { trigger: ".forma-hero", start: "top top", end: "bottom top", scrub: 0.7 } });
       gsap.utils.toArray(".reveal-line").forEach((line) => gsap.from(line, { y: 55, opacity: 0, duration: 0.9, ease: "power3.out", scrollTrigger: { trigger: line, start: "top 88%" } }));
-      gsap.utils.toArray(".image-reveal").forEach((media) => gsap.from(media, { clipPath: "inset(0 0 100% 0)", duration: 1.1, ease: "power4.out", scrollTrigger: { trigger: media, start: "top 82%" } }));
+      gsap.utils.toArray(".image-reveal img").forEach((image) => gsap.from(image, { scale: 1.04, duration: 1, ease: "power3.out", scrollTrigger: { trigger: image, start: "top 88%", once: true } }));
       gsap.from(".works-rule", { scaleX: 0, transformOrigin: "left", duration: 1.1, scrollTrigger: { trigger: ".works-intro", start: "top 80%" } });
     }, scope);
     return () => context.revert();
