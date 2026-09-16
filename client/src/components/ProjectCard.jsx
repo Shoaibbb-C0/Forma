@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import TransitionLink from "./TransitionLink";
 import { asset } from "../data/content";
 export default function ProjectCard({ project, index = 0 }) {
   return (
     <article className={`project-card p${index}`}>
-      <Link to={`/work/${project.slug}`}>
+      <TransitionLink to={`/work/${project.slug}`}>
         <div className="image-wrap">
           <img
             src={asset(project.cover)}
@@ -19,7 +19,7 @@ export default function ProjectCard({ project, index = 0 }) {
             {project.location} · {project.year}
           </span>
         </div>
-      </Link>
+      </TransitionLink>
     </article>
   );
 }

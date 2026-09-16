@@ -1,18 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
-export function Footer() {
+export function Footer({ showLead = true }) {
   return (
     <footer>
-      <div className="footer-lead">
-        <p>
-          A thoughtful place
-          <br />
-          begins with <em>a thought.</em>
-        </p>
-        <Link className="footer-arrow" to="/contact">
-          ↗
-        </Link>
-      </div>
+      {showLead && (
+        <div className="footer-lead">
+          <p>
+            A thoughtful place
+            <br />
+            begins with <em>a thought.</em>
+          </p>
+          <Link
+            className="footer-arrow"
+            to="/contact"
+            aria-label="Contact Forma"
+          >
+            ↗
+          </Link>
+        </div>
+      )}
       <div className="footer-grid">
         <Link className="logo" to="/">
           Forma<sup>®</sup>
@@ -30,9 +36,9 @@ export function Footer() {
           <a href="mailto:hello@forma.studio">hello@forma.studio</a>
         </div>
         <div>
-          <small>Follow</small>
-          <a href="#">Instagram</a>
-          <a href="#">LinkedIn</a>
+          <small>Explore</small>
+          <Link to="/work">Projects</Link>
+          <Link to="/journal">Journal</Link>
         </div>
       </div>
       <div className="footer-bottom">
@@ -43,11 +49,11 @@ export function Footer() {
     </footer>
   );
 }
-export function Page({ children }) {
+export function Page({ children, footerLead = true }) {
   return (
     <>
       <main>{children}</main>
-      <Footer />
+      <Footer showLead={footerLead} />
     </>
   );
 }
