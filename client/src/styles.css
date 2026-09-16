@@ -1320,8 +1320,13 @@ body {
 }
 .forma-hero {
   position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  gap: 24px 5vw;
+  align-items: start;
   min-height: 100svh;
-  padding: 118px 2.25vw 2.2vw;
+  padding: clamp(110px, 12vh, 160px) var(--chapter-gutter) 32px;
   overflow: hidden;
 }
 .hero-index,
@@ -1346,62 +1351,55 @@ body {
 .hero-monument {
   position: relative;
   z-index: 3;
-  margin: 2vh 0 0;
-  font: 600 clamp(5rem, 12.8vw, 12.5rem)/0.8 var(--sans);
-  letter-spacing: -0.085em;
+  grid-column: 1;
+  grid-row: 1;
+  min-width: 0;
+  margin: 0;
+  font: 600 clamp(3rem, 7.8vw, 10rem)/.94 var(--sans);
+  letter-spacing: -0.075em;
 }
 .hero-word {
   display: block;
-  width: max-content;
+  width: 100%;
   overflow: hidden;
 }
 .hero-word > span {
   display: block;
 }
 .hero-word--arch {
-  margin-left: -0.75vw;
+  margin-left: 0;
 }
 .hero-word--tecture {
-  margin-left: 20vw;
+  margin-left: 0;
 }
 .forma-hero-media {
-  position: absolute;
+  position: relative;
   z-index: 2;
-  top: 18vh;
-  right: 9vw;
-  width: 38vw;
-  height: 69vh;
+  grid-column: 2;
+  grid-row: 1 / 3;
+  width: 100%;
+  height: clamp(400px, 68svh, 850px);
   overflow: hidden;
   background: #d7d7d1;
   visibility: visible;
   opacity: 1;
 }
 .forma-hero-media img {
+  width: 100%;
   height: 100%;
+  object-fit: cover;
   object-position: 54% center;
 }
 .hero-detail {
-  position: absolute;
+  grid-column: 1;
+  grid-row: 2;
+  align-self: end;
   z-index: 4;
-  right: 9vw;
-  bottom: 13vh;
-  width: 38vw;
+  max-width: 340px;
   margin: 0;
-  padding: 8px 0;
-  text-align: right;
+  padding: 0;
+  text-align: left;
   font: 400 clamp(1rem, 1.25vw, 1.3rem)/1.35 var(--sans);
-}
-.hero-caption-new {
-  position: absolute;
-  z-index: 4;
-  left: 51%;
-  bottom: 3vw;
-}
-.hero-scroll {
-  position: absolute;
-  z-index: 4;
-  right: 2.25vw;
-  bottom: 3vw;
 }
 .manifesto {
   min-height: 92vh;
@@ -1590,13 +1588,6 @@ body {
 @media (max-width: 900px) {
   .header-status {
     display: none;
-  }
-  .hero-monument {
-    font-size: clamp(5.2rem, 16vw, 9rem);
-  }
-  .forma-hero-media {
-    width: 42vw;
-    right: 8vw;
   }
   .manifesto h2 {
     grid-column: 4 / 12;
@@ -2294,43 +2285,23 @@ figcaption,
     text-transform: uppercase;
   }
   .forma-hero {
-    min-height: 100svh;
-    padding: 84px 18px 22px;
-  }
-  .hero-index {
-    top: 25.5%;
-    left: auto;
-    right: 18px;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto;
+    min-height: auto;
+    padding: 100px 18px 32px;
+    gap: 24px;
   }
   .hero-monument {
-    margin-top: 1vh;
-    font-size: clamp(4rem, 20vw, 6.5rem);
-    line-height: 0.76;
-  }
-  .hero-word--tecture {
-    margin-left: 0;
+    font-size: clamp(3rem, 15vw, 6rem);
   }
   .forma-hero-media {
-    top: 40%;
-    right: 0;
-    width: 73vw;
-    height: 43vh;
+    grid-column: 1;
+    grid-row: 3;
+    height: auto;
+    aspect-ratio: 4 / 5;
   }
   .hero-detail {
-    left: 18px;
-    right: auto;
-    bottom: 8vh;
-    width: min(75vw, 290px);
-    padding: 0;
-    text-align: left;
-    font-size: 0.95rem;
-  }
-  .hero-caption-new {
-    display: none;
-  }
-  .hero-scroll {
-    right: 18px;
-    bottom: 22px;
+    font-size: 1rem;
   }
   .manifesto {
     min-height: auto;

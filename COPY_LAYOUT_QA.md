@@ -14,3 +14,11 @@ Verification:
 - `npm run build`, `node --test client/tests/catalogue.test.mjs`, and `git diff --check` passed. Node tests emit an existing module-type notice.
 
 These are representative viewport checks, not a guarantee for every physical device. Enquiry delivery remains outside this change and was not retested.
+
+## Follow-up: persistent hero rules and caption removal
+
+The supplied follow-up screenshot still showed the old overlapping composition. Removed that composition from the original stylesheet, including conflicting tablet/mobile rules; the hero no longer depends on a separately loaded override. A refreshed development page and production preview both render the grid layout. This establishes the current code/build behavior, not the cause of the user's older screenshot.
+
+Removed all decorative photographic captions, the hero project/year caption, scroll prompt, selected-work date/category label, archive date/count label, and case-study section number. Project identities and facts remain where useful for navigation and case-study information.
+
+Hero overlap/overflow checks passed at 320, 390, 768, 1024, 1440, 1847 (supplied screenshot width), and 1920px. Production preview additionally checked phone/tablet/desktop geometry and six case-study pages for absence of photographic captions. Build, three catalogue tests, and diff checks passed. In-app browser used because the browser CLI is unavailable; no public hosting deployment was performed.

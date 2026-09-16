@@ -77,7 +77,7 @@ export default function Home() {
         })
         .from(".forma-hero-media", { opacity: 0, duration: 1 }, 0.2)
         .from(
-          ".hero-detail, .hero-scroll",
+          ".hero-detail",
           { y: 12, opacity: 0, duration: 0.7, stagger: 0.08 },
           0.65,
         );
@@ -225,10 +225,6 @@ export default function Home() {
             <br />
             material and light.
           </p>
-          <span className="hero-caption-new">House on the Ridge / 2025</span>
-          <a className="hero-scroll" href="#studio-intro">
-            Scroll ↓
-          </a>
         </section>
         <section id="studio-intro" className="manifesto">
           <h2 className="type-mask-group">
@@ -257,11 +253,6 @@ export default function Home() {
             <br />
             WORKS
           </h2>
-          <span className="works-years">
-            2023—2025
-            <br />
-            Residential / Commercial
-          </span>
         </section>
         <section className="folio-list" aria-label="Featured projects">
           {projects.slice(0, 3).map((project, index) => (
@@ -275,9 +266,6 @@ export default function Home() {
           className="folio-list more-work"
           aria-label="More selected projects"
         >
-          <span className="section-label more-work-label">
-            05 / Further studies
-          </span>
           {projects.slice(3, 5).map((project, index) => (
             <ProjectSpread
               key={project.slug}

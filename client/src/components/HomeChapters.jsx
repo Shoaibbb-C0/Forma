@@ -49,7 +49,6 @@ export function MaterialInterlude() {
             loading="lazy"
           />
         </TransitionLink>
-        <figcaption>01 / Courtyard House — Goa</figcaption>
       </figure>
       <figure className="detail-image detail-image--two image-reveal">
         <TransitionLink to="/work/house-on-the-ridge">
@@ -59,7 +58,6 @@ export function MaterialInterlude() {
             loading="lazy"
           />
         </TransitionLink>
-        <figcaption>02 / House on the Ridge — Alibaug</figcaption>
       </figure>
       <figure className="detail-image detail-image--three image-reveal">
         <TransitionLink to="/work/common-ground">
@@ -69,7 +67,6 @@ export function MaterialInterlude() {
             loading="lazy"
           />
         </TransitionLink>
-        <figcaption>03 / Common Ground — Bengaluru</figcaption>
       </figure>
     </section>
   );
@@ -134,7 +131,6 @@ export function Archive() {
         <br />
         of places.
       </h2>
-      <span className="archive-range">2022—2025 / 06 PROJECTS</span>
       <div className="archive-rows">
         {projects.map((project, i) => (
           <TransitionLink
