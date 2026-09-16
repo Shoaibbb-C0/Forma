@@ -75,22 +75,12 @@ export default function Home() {
           duration: 1.15,
           stagger: 0.1,
         })
-        .from(".forma-hero-media", { y: 30, duration: 1 }, 0.2)
+        .from(".forma-hero-media", { opacity: 0, duration: 1 }, 0.2)
         .from(
-          ".hero-detail, .hero-index, .hero-scroll",
+          ".hero-detail, .hero-scroll",
           { y: 12, opacity: 0, duration: 0.7, stagger: 0.08 },
           0.65,
         );
-      gsap.to(".hero-word--arch", {
-        yPercent: -14,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".forma-hero",
-          start: "top top",
-          end: "bottom top",
-          scrub: 0.7,
-        },
-      });
       gsap.to(".forma-hero-media img", {
         scale: 1.08,
         ease: "none",
@@ -99,17 +89,6 @@ export default function Home() {
           start: "top top",
           end: "bottom top",
           scrub: 0.7,
-        },
-      });
-      gsap.to(".hero-index", {
-        opacity: 0,
-        y: -16,
-        ease: "none",
-        scrollTrigger: {
-          trigger: ".forma-hero",
-          start: "top top",
-          end: "bottom 40%",
-          scrub: true,
         },
       });
       gsap.fromTo(
@@ -227,11 +206,6 @@ export default function Home() {
     <Page footerLead={false}>
       <div ref={scope} className="forma-home">
         <section className="forma-hero" aria-labelledby="hero-title">
-          <div className="hero-index">
-            01 / 07
-            <br />
-            Mumbai, India
-          </div>
           <h1 id="hero-title" className="hero-monument">
             <span className="hero-word">
               <span>FORMA</span>
@@ -257,7 +231,6 @@ export default function Home() {
           </a>
         </section>
         <section id="studio-intro" className="manifesto">
-          <div className="section-label">01 / Introduction</div>
           <h2 className="type-mask-group">
             <span className="type-mask">
               <span>We shape spaces around</span>
@@ -272,20 +245,12 @@ export default function Home() {
             </span>
           </h2>
           <div className="manifesto-aside">
-            <p>
-              Homes for living.
-              <br />
-              Places for gathering.
-              <br />
-              Spaces that endure.
-            </p>
             <Link className="folio-link" to="/studio">
               Inside the studio <span>↗</span>
             </Link>
           </div>
         </section>
         <section className="works-intro">
-          <div className="section-label">02 / Selected works</div>
           <div className="works-rule" />
           <h2 className="reveal-line">
             SELECTED
@@ -297,7 +262,6 @@ export default function Home() {
             <br />
             Residential / Commercial
           </span>
-          <span className="works-count">05 PROJECTS</span>
         </section>
         <section className="folio-list" aria-label="Featured projects">
           {projects.slice(0, 3).map((project, index) => (

@@ -17,7 +17,7 @@ const services = [
 ];
 export default function Services() {
   return (
-    <Page>
+    <Page footerLead={false}>
       <Intro
         eyebrow="How we work"
         title={
@@ -27,16 +27,12 @@ export default function Services() {
             to make <em>space.</em>
           </>
         }
-        copy="From first possibility to final detail, we bring a focused, collaborative approach."
       />
       <section className="service-list">
         {services.map(([title, copy]) => (
           <article key={title}>
             <h2>{title}</h2>
             <p>{copy}</p>
-            <small>
-              Strategy · Concept · Design development · Site support
-            </small>
           </article>
         ))}
       </section>

@@ -42,7 +42,7 @@ export default function TransitionLink({ to, children, onClick, ...props }) {
       {cover &&
         createPortal(
           <div className="route-curtain" aria-hidden="true">
-            <span>FORMA / PROJECT</span>
+            <span>FORMA</span>
           </div>,
           document.body,
         )}

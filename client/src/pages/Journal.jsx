@@ -4,9 +4,9 @@ import { Page, Intro } from "../components/Layout";
 import { articles, asset } from "../data/content";
 export default function Journal() {
   return (
-    <Page>
+    <Page footerLead={false}>
       <Intro
-        eyebrow="Journal / Notes from the studio"
+        eyebrow="Journal"
         title={
           <>
             On space, matter
@@ -20,10 +20,9 @@ export default function Journal() {
           <article key={article.slug}>
             <Link to={`/journal/${article.slug}`}>
               <img src={asset(article.cover)} alt="" loading="lazy" />
-              <p className="eyebrow">Field notes · {article.date}</p>
+              <p className="eyebrow">{article.date}</p>
               <h2>{article.title}</h2>
               <p>{article.excerpt}</p>
-              <span className="text-link">Read note →</span>
             </Link>
           </article>
         ))}

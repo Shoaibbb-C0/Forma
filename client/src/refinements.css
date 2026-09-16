@@ -1,0 +1,70 @@
+/* Keep hero typography and photography in independent, flowing grid areas. */
+.forma-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-rows: auto 1fr auto;
+  gap: 24px 5vw;
+  min-height: 100svh;
+  padding: clamp(110px, 12vh, 160px) var(--chapter-gutter) 32px;
+  align-items: start;
+}
+.hero-monument {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+  font-size: clamp(3rem, 7.8vw, 10rem);
+  line-height: .94;
+  letter-spacing: -.075em;
+  min-width: 0;
+}
+.hero-word { width: 100%; }
+.hero-word--arch, .hero-word--tecture { margin-left: 0; }
+.forma-hero-media {
+  position: relative;
+  inset: auto;
+  grid-column: 2;
+  grid-row: 1 / 3;
+  width: 100%;
+  height: clamp(400px, 68svh, 850px);
+}
+.forma-hero-media img { width: 100%; height: 100%; object-fit: cover; }
+.hero-detail {
+  position: static;
+  grid-column: 1;
+  grid-row: 2;
+  width: auto;
+  max-width: 340px;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  align-self: end;
+}
+.hero-caption-new {
+  position: static;
+  grid-column: 2;
+  grid-row: 3;
+  display: block;
+}
+.hero-scroll { position: static; grid-column: 1; grid-row: 3; justify-self: start; }
+.catalogue-opening .editorial-title { margin-top: 0; }
+.monograph-narrative h2 { grid-column: 4 / 12; }
+.contact-cta { grid-template-columns: 1fr auto; }
+.contact-cta h2 { grid-column: 1; }
+.contact-cta > .button { grid-column: 2; }
+@media (max-width: 650px) {
+  .forma-hero {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto auto auto auto;
+    min-height: auto;
+    padding: 100px 18px 32px;
+    gap: 24px;
+  }
+  .hero-monument { grid-column: 1; grid-row: 1; font-size: clamp(3rem, 15vw, 6rem); line-height: .94; }
+  .hero-detail { grid-column: 1; grid-row: 2; width: auto; font-size: 1rem; }
+  .forma-hero-media { grid-column: 1; grid-row: 3; height: auto; aspect-ratio: 4 / 5; }
+  .hero-caption-new { grid-column: 1; grid-row: 4; font-size: .7rem; }
+  .hero-scroll { display: none; }
+  .monograph-narrative h2 { grid-column: 1 / 5; }
+  .contact-cta { grid-template-columns: 1fr; }
+  .contact-cta h2, .contact-cta > .button { grid-column: 1; }
+}

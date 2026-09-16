@@ -42,7 +42,6 @@ export function Footer({ showLead = true }) {
         </div>
       </div>
       <div className="footer-bottom">
-        <span>Architecture & design practice</span>
         <span>© 2026 Forma Studio</span>
         <Link to="/contact">Available for select projects ↗</Link>
       </div>
@@ -60,7 +59,7 @@ export function Page({ children, footerLead = true }) {
 export function Intro({ eyebrow, title, copy }) {
   return (
     <section className="intro">
-      <p className="eyebrow">{eyebrow}</p>
+      {eyebrow && <p className="eyebrow">{eyebrow}</p>}
       <h1>{title}</h1>
       {copy && <p className="lede">{copy}</p>}
     </section>

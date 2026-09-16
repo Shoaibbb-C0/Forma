@@ -80,11 +80,6 @@ export default function Navbar() {
             {label}
           </NavLink>
         ))}
-        <div className="nav-metadata">
-          Architecture / Design
-          <br />
-          Est. 2026
-        </div>
       </nav>
       <Link className="header-status" to="/contact">
         <i aria-hidden="true" />

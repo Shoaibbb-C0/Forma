@@ -36,17 +36,11 @@ const capabilities = [
 export function MaterialInterlude() {
   return (
     <section className="material-interlude" aria-labelledby="material-heading">
-      <span className="section-label">03 / Project interlude</span>
       <h2 id="material-heading" className="reveal-line">
         The quiet logic
         <br />
         of <em>a place.</em>
       </h2>
-      <p className="interlude-note">
-        Structure. Light. Material.
-        <br />
-        Our work begins with patient observation.
-      </p>
       <figure className="detail-image detail-image--one image-reveal">
         <TransitionLink to="/work/courtyard-house">
           <img
@@ -84,16 +78,12 @@ export function MaterialInterlude() {
 export function Practice() {
   return (
     <section className="practice-chapter" aria-labelledby="practice-heading">
-      <span className="section-label">04 / Practice</span>
+      <span className="section-label">Practice</span>
       <h2 id="practice-heading" className="reveal-line">
         A practice of
         <br />
         <em>close attention.</em>
       </h2>
-      <p className="practice-intro">
-        We listen closely, draw precisely and build with care. Four connected
-        considerations guide each place we make.
-      </p>
       <div className="principle-rows">
         {principles.map(([title, copy], i) => (
           <div className="principle-row" key={title}>
@@ -113,7 +103,7 @@ export function Capabilities() {
       className="capabilities-chapter"
       aria-labelledby="capabilities-heading"
     >
-      <span className="section-label">04 / Capabilities</span>
+      <span className="section-label">Services</span>
       <h2 id="capabilities-heading">
         From a room
         <br />
@@ -138,7 +128,7 @@ export function Capabilities() {
 export function Archive() {
   return (
     <section className="archive-chapter" aria-labelledby="archive-heading">
-      <span className="section-label">05 / Archive</span>
+      <span className="section-label">Archive</span>
       <h2 id="archive-heading" className="reveal-line">
         An index
         <br />
@@ -176,7 +166,7 @@ export function StudioPreview() {
       className="studio-chapter"
       aria-labelledby="studio-preview-heading"
     >
-      <span className="section-label">06 / Studio</span>
+      <span className="section-label">Studio</span>
       <div className="studio-fragment image-reveal">
         <img
           src={asset("studio.jpg")}
@@ -196,10 +186,6 @@ export function StudioPreview() {
           A multidisciplinary practice working across architecture, interiors
           and environments for work, gathering and retreat.
         </p>
-        <p>
-          We make the quiet logic of a site tangible through structure, light
-          and material.
-        </p>
         <Link className="folio-link" to="/studio">
           About the studio <span>↗</span>
         </Link>
@@ -214,7 +200,7 @@ export function ContactConclusion() {
       className="contact-conclusion"
       aria-labelledby="contact-conclusion-heading"
     >
-      <span className="section-label">07 / Contact</span>
+      <span className="section-label">Contact</span>
       <h2 id="contact-conclusion-heading" className="reveal-line">
         A thoughtful place
         <br />

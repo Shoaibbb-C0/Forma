@@ -35,12 +35,11 @@ export default function Project() {
       <dl className="monograph-facts"><div><dt>Typology</dt><dd>{project.sector}</dd></div><div><dt>Location</dt><dd>{project.location}</dd></div><div><dt>Year</dt><dd>{project.year}</dd></div><div><dt>Scope</dt><dd>{project.scope}</dd></div></dl>
     </section>
     <figure className="monograph-hero editorial-media"><img src={asset(project.cover)} alt={`${project.title} — ${project.location}`} fetchpriority="high" /><figcaption>{number} / {project.title} — {project.year}</figcaption></figure>
-    <section className="monograph-narrative"><span className="section-label">01 / The premise</span><h2 className="editorial-reveal">{project.premise}</h2><p>{project.accent}</p><span className="monograph-image-count section-label">02 photographic views</span></section>
+    <section className="monograph-narrative"><h2 className="editorial-reveal">{project.premise}</h2></section>
     <section className="monograph-spread" aria-label={`${project.title} photographic study`}>
       {secondary && <figure className="monograph-detail editorial-media"><img src={asset(secondary)} alt={`Second photographic view of ${project.title}`} loading="lazy" /><figcaption>02 / {project.title} — another perspective</figcaption></figure>}
       <p className="monograph-spread-statement editorial-reveal">{project.accent}</p>
       <figure className="monograph-fragment editorial-media"><img src={asset(project.cover)} alt={`Closer crop of the primary view of ${project.title}`} loading="lazy" /><figcaption>01 / Primary view — detail crop</figcaption></figure>
-      <span className="monograph-endmark section-label">End of study / {number}</span>
     </section>
     <section className="monograph-next" aria-labelledby="next-project-heading"><div className="next-project-index"><span className="section-label">Next project</span><span>{nextNumber}</span><Link className="folio-link" to="/work">All projects <span>→</span></Link></div><TransitionLink className="next-project-composition" to={`/work/${next.slug}`}><h2 id="next-project-heading">{next.title}<span aria-hidden="true">↗</span></h2><div className="next-project-media"><img src={asset(next.cover)} alt={next.title} loading="lazy" /></div><span className="section-label">{next.sector} / {next.year}</span></TransitionLink></section>
   </div></Page>;

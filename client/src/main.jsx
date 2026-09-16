@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import "./styles.css";
 import "./phase3.css";
+import "./refinements.css";
 
 function RouteEffects() {
   const { pathname } = useLocation();

@@ -40,10 +40,9 @@ export default function Contact() {
   }
 
   return <Page footerLead={false}><div ref={ref} className="contact-editorial-page">
-    <section className="contact-editorial-opening"><span className="section-label">03 / Contact</span><EditorialTitle lines={["Every place", "starts with", <em>a conversation.</em>]} /><p>Tell us where you are, what you’re imagining and what you need the space to make possible. A rough thought is enough to begin.</p></section>
-    <section className="contact-editorial-body" aria-label="Contact Forma"><aside className="contact-coordinates"><div><span className="section-label">Email</span><a href="mailto:hello@forma.studio">hello@forma.studio ↗</a></div><div><span className="section-label">Studio</span><p>Mumbai, India<br />Visits by appointment</p></div><p className="contact-aside-note">Prefer a conversation by email?<br />Write to us directly.</p></aside>
+    <section className="contact-editorial-opening"><span className="section-label">Contact</span><EditorialTitle lines={["Every place", "starts with", <em>a conversation.</em>]} /><p>Tell us about your project.</p></section>
+    <section className="contact-editorial-body" aria-label="Contact Forma"><aside className="contact-coordinates"><div><span className="section-label">Email</span><a href="mailto:hello@forma.studio">hello@forma.studio ↗</a></div><div><span className="section-label">Studio</span><p>Mumbai, India<br />Visits by appointment</p></div></aside>
       <form className="architectural-form" onSubmit={submit} aria-busy={state === "sending"}>
-        <p className="section-label form-heading">01 / Project notes</p>
         <label htmlFor="enquiry-name">Name<input id="enquiry-name" name="name" required maxLength={120} autoComplete="name" placeholder="Your name" /></label>
         <label htmlFor="enquiry-email">Email<input id="enquiry-email" type="email" name="email" required maxLength={254} autoComplete="email" placeholder="name@company.com" /></label>
         <label htmlFor="enquiry-interest">Project type<select id="enquiry-interest" name="interest"><option>New residential project</option><option>Commercial / hospitality project</option><option>Consultation booking</option><option>Press / collaboration</option></select></label>
