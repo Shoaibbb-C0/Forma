@@ -1,12 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 export default function TransitionLink({ to, children, onClick, ...props }) {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [cover, setCover] = useState(false);
   const timer = useRef(null);
   useEffect(() => () => clearTimeout(timer.current), []);
+  useEffect(() => {
+    clearTimeout(timer.current);
+    timer.current = null;
+    setCover(false);
+  }, [pathname]);
 
   function transition(event) {
     onClick?.(event);
@@ -17,6 +23,8 @@ export default function TransitionLink({ to, children, onClick, ...props }) {
       event.ctrlKey ||
       event.shiftKey ||
       event.altKey ||
+      (props.target && props.target !== "_self") ||
+      to === pathname ||
       matchMedia("(prefers-reduced-motion: reduce)").matches
     )
       return;

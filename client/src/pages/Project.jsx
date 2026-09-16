@@ -1,59 +1,47 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Page } from "../components/Layout";
+import { EditorialTitle, useEditorialMotion } from "../components/Editorial";
+import TransitionLink from "../components/TransitionLink";
 import NotFound from "./NotFound";
 import { asset, projects } from "../data/content";
+
+// Presentation only: no additional project facts are introduced.
+const titleLines = {
+  "house-on-the-ridge": ["House on", "the Ridge"],
+  "common-ground": ["Common", "Ground"],
+  "courtyard-house": ["Courtyard", "House"],
+  "north-light-gallery": ["North Light", "Gallery"],
+  "the-long-table": ["The Long", "Table"],
+  "monsoon-house": ["Monsoon", "House"],
+};
+
 export default function Project() {
   const { slug } = useParams();
-  const project = projects.find((p) => p.slug === slug);
+  const project = projects.find(record => record.slug === slug);
+  const ref = useEditorialMotion(slug);
+  useEffect(() => { if (project) document.title = `${project.title} — Forma`; }, [project]);
   if (!project) return <NotFound />;
-  const next = projects[(projects.indexOf(project) + 1) % projects.length];
-  return (
-    <Page>
-      <section className="case-hero">
-        <div>
-          <p className="eyebrow">
-            {project.sector} / {project.year}
-          </p>
-          <h1>{project.title}</h1>
-          <p className="lede">{project.accent}</p>
-        </div>
-        <img src={asset(project.cover)} alt={project.title} />
-      </section>
-      <section className="case-intro">
-        <div className="facts">
-          <span>Location</span>
-          <b>{project.location}</b>
-          <span>Scope</span>
-          <b>{project.scope}</b>
-        </div>
-        <h2>{project.premise}</h2>
-      </section>
-      <section className="case-gallery">
-        {project.gallery.map((image, i) => (
-          <img
-            key={image}
-            className={`gallery-${i}`}
-            src={asset(image)}
-            alt={`${project.title} detail ${i + 1}`}
-            loading="lazy"
-          />
-        ))}
-      </section>
-      <section className="case-copy">
-        <p className="eyebrow">The response</p>
-        <p>
-          We worked with proportion, shadow and material to let the space find
-          its own sense of ease. Every line is deliberate, but nothing feels
-          overdetermined.
-        </p>
-      </section>
-      <Link className="next-project" to={`/work/${next.slug}`}>
-        <span>Next project</span>
-        <h2>
-          {next.title} <i>↗</i>
-        </h2>
-      </Link>
-    </Page>
-  );
+  const index = projects.indexOf(project);
+  const number = String(index + 1).padStart(2, "0");
+  const next = projects[(index + 1) % projects.length];
+  const nextNumber = String((index + 1) % projects.length + 1).padStart(2, "0");
+  const secondary = project.gallery.find(image => image !== project.cover);
+
+  return <Page footerLead={false}><div ref={ref} className={`monograph monograph--${slug}`}>
+    <section className="monograph-opening">
+      <span className="section-label">{number} / Project</span>
+      <EditorialTitle lines={titleLines[slug] || [project.title]} />
+      <dl className="monograph-facts"><div><dt>Typology</dt><dd>{project.sector}</dd></div><div><dt>Location</dt><dd>{project.location}</dd></div><div><dt>Year</dt><dd>{project.year}</dd></div><div><dt>Scope</dt><dd>{project.scope}</dd></div></dl>
+    </section>
+    <figure className="monograph-hero editorial-media"><img src={asset(project.cover)} alt={`${project.title} — ${project.location}`} fetchpriority="high" /><figcaption>{number} / {project.title} — {project.year}</figcaption></figure>
+    <section className="monograph-narrative"><span className="section-label">01 / The premise</span><h2 className="editorial-reveal">{project.premise}</h2><p>{project.accent}</p><span className="monograph-image-count section-label">02 photographic views</span></section>
+    <section className="monograph-spread" aria-label={`${project.title} photographic study`}>
+      {secondary && <figure className="monograph-detail editorial-media"><img src={asset(secondary)} alt={`Second photographic view of ${project.title}`} loading="lazy" /><figcaption>02 / {project.title} — another perspective</figcaption></figure>}
+      <p className="monograph-spread-statement editorial-reveal">{project.accent}</p>
+      <figure className="monograph-fragment editorial-media"><img src={asset(project.cover)} alt={`Closer crop of the primary view of ${project.title}`} loading="lazy" /><figcaption>01 / Primary view — detail crop</figcaption></figure>
+      <span className="monograph-endmark section-label">End of study / {number}</span>
+    </section>
+    <section className="monograph-next" aria-labelledby="next-project-heading"><div className="next-project-index"><span className="section-label">Next project</span><span>{nextNumber}</span><Link className="folio-link" to="/work">All projects <span>→</span></Link></div><TransitionLink className="next-project-composition" to={`/work/${next.slug}`}><h2 id="next-project-heading">{next.title}<span aria-hidden="true">↗</span></h2><div className="next-project-media"><img src={asset(next.cover)} alt={next.title} loading="lazy" /></div><span className="section-label">{next.sector} / {next.year}</span></TransitionLink></section>
+  </div></Page>;
 }

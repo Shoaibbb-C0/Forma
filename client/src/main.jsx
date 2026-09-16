@@ -13,6 +13,7 @@ import Article from "./pages/Article";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import "./styles.css";
+import "./phase3.css";
 
 function RouteEffects() {
   const { pathname } = useLocation();
