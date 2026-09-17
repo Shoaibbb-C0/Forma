@@ -12,16 +12,16 @@ export function useEditorialMotion(key) {
     if (!ref.current) return undefined;
     const preferences = gsap.matchMedia();
     preferences.add("(prefers-reduced-motion: no-preference)", () => {
-      const context = gsap.context(() => {
+      const context = gsap.context(self => {
         const title = gsap.utils.toArray(".editorial-title .type-mask > span");
         if (title.length) gsap.from(title, { yPercent: 110, stagger: .09, duration: 1, ease: "power4.out" });
         gsap.utils.toArray(".editorial-reveal").forEach(element => {
           ScrollTrigger.create({ trigger: element, start: "top 88%", once: true,
-            onEnter: () => gsap.fromTo(element, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: .85, ease: "power3.out", clearProps: "transform,opacity" }) });
+            onEnter: () => self.add(() => gsap.fromTo(element, { y: 24, opacity: 0 }, { y: 0, opacity: 1, duration: .85, ease: "power3.out", clearProps: "transform,opacity" })) });
         });
         gsap.utils.toArray(".editorial-media").forEach(element => {
           ScrollTrigger.create({ trigger: element, start: "top 90%", once: true,
-            onEnter: () => gsap.fromTo(element, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0)", duration: 1.1, ease: "power4.out", clearProps: "clipPath" }) });
+            onEnter: () => self.add(() => gsap.fromTo(element, { clipPath: "inset(0 0 100% 0)" }, { clipPath: "inset(0)", duration: 1.1, ease: "power4.out", clearProps: "clipPath" })) });
         });
       }, ref);
       return () => context.revert();

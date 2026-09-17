@@ -37,7 +37,6 @@ export default function Project() {
     <section className="monograph-spread" aria-label={`${project.title} photographic study`}>
       {secondary && <figure className="monograph-detail editorial-media"><img src={asset(secondary)} alt={`Second photographic view of ${project.title}`} loading="lazy" /></figure>}
       <p className="monograph-spread-statement editorial-reveal">{project.accent}</p>
-      <figure className="monograph-fragment editorial-media"><img src={asset(project.cover)} alt={`Closer crop of the primary view of ${project.title}`} loading="lazy" /></figure>
     </section>
     <section className="monograph-next" aria-labelledby="next-project-heading"><div className="next-project-index"><span className="section-label">Next project</span><span>{nextNumber}</span><Link className="folio-link" to="/work">All projects <span>→</span></Link></div><TransitionLink className="next-project-composition" to={`/work/${next.slug}`}><h2 id="next-project-heading">{next.title}<span aria-hidden="true">↗</span></h2><div className="next-project-media"><img src={asset(next.cover)} alt={next.title} loading="lazy" /></div><span className="section-label">{next.sector} / {next.year}</span></TransitionLink></section>
   </div></Page>;

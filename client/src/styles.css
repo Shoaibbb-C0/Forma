@@ -2330,7 +2330,7 @@ figcaption,
   .works-intro h2 {
     grid-column: 1 / 5;
     margin-top: 14vh;
-    font-size: clamp(4.7rem, 22vw, 7rem);
+    font-size: clamp(3.5rem, 19vw, 7rem);
   }
   .works-years {
     grid-column: 1 / 3;

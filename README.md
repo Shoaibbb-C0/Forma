@@ -17,7 +17,7 @@ Forma was created as an agency portfolio project to demonstrate premium web desi
 - Responsive navigation and touch-friendly mobile menu
 - Accessible enquiry form with loading, success, and error feedback
 - Express API with server validation, rate limiting, and spam protection
-- Optional MongoDB enquiry storage
+- MongoDB-backed enquiry storage
 - Purposeful GSAP hero animation
 - Reduced-motion support
 - Responsive layouts from 320px to large desktop screens
@@ -41,7 +41,7 @@ Forma was created as an agency portfolio project to demonstrate premium web desi
 - Express
 - Express Rate Limit
 - Mongoose
-- Optional MongoDB persistence
+- MongoDB enquiry persistence
 
 ### Deployment
 
@@ -120,7 +120,7 @@ Backend:
 CLIENT_ORIGIN=https://your-frontend-domain.vercel.app
 ```
 
-MongoDB is optional for this portfolio demo. Add `MONGODB_URI` only when persistent enquiry storage is required.
+Browsing the portfolio does not require MongoDB. Set `MONGODB_URI` to enable enquiry submissions; the API will not report success without persistent storage.
 
 Local environment files are ignored by Git and must never be committed.
 
@@ -128,7 +128,7 @@ Local environment files are ignored by Git and must never be committed.
 
 The enquiry form validates submissions in the browser and on the server. It includes rate limiting and a hidden spam field.
 
-Without MongoDB, accepted enquiries are logged by the backend but are not permanently stored. A transactional email provider can be connected later for production enquiry delivery.
+MongoDB must be connected for the API to confirm an enquiry. Without it, the API returns 503 and the form preserves the message with an email fallback. The server does not log personal enquiry details. Transactional email delivery is not configured.
 
 ## Content management
 

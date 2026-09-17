@@ -51,7 +51,7 @@ export function Footer({ showLead = true }) {
 export function Page({ children, footerLead = true }) {
   return (
     <>
-      <main>{children}</main>
+      <main id="main-content" tabIndex={-1}>{children}</main>
       <Footer showLead={footerLead} />
     </>
   );

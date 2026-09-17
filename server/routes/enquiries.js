@@ -11,14 +11,16 @@ const limiter = rateLimit({
 router.post("/", limiter, async (req, res) => {
   const { name, email, interest, message, website } = req.body || {};
   if (website) return res.status(204).end();
-  if (!name || !email || !message || !/^\S+@\S+\.\S+$/.test(email))
+  if ([name, email, message].some(value => typeof value !== "string" || !value.trim()) ||
+      name.length > 100 || email.length > 160 || message.length > 3000 ||
+      (interest !== undefined && (typeof interest !== "string" || interest.length > 80)) ||
+      !/^\S+@\S+\.\S+$/.test(email.trim()))
     return res
       .status(400)
       .json({ error: "Please provide a name, valid email and message." });
   try {
-    if (Enquiry.db.readyState === 1)
-      await Enquiry.create({ name, email, interest, message });
-    console.log("New enquiry:", { name, email, interest });
+    if (Enquiry.db.readyState !== 1) return res.status(503).json({ error: "Enquiries are unavailable. Please email hello@forma.studio." });
+    await Enquiry.create({ name: name.trim(), email: email.trim(), interest, message: message.trim() });
     return res.status(201).json({ ok: true });
   } catch {
     return res.status(500).json({ error: "Unable to send enquiry." });

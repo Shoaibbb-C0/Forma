@@ -1,6 +1,7 @@
 {
   "name": "forma-client",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "node ./node_modules/vite/bin/vite.js",
     "build": "node ./node_modules/vite/bin/vite.js build",

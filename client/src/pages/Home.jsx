@@ -67,7 +67,7 @@ export default function Home() {
   useLayoutEffect(() => {
     if (matchMedia("(prefers-reduced-motion: reduce)").matches)
       return undefined;
-    const context = gsap.context(() => {
+    const context = gsap.context((self) => {
       gsap
         .timeline({ defaults: { ease: "power4.out" } })
         .from(".hero-word > span", {
@@ -113,7 +113,7 @@ export default function Home() {
             trigger: line,
             start: "top 88%",
             once: true,
-            onEnter: () =>
+            onEnter: () => self.add(() =>
               gsap.fromTo(
                 line,
                 { y: 55, opacity: 0 },
@@ -124,7 +124,7 @@ export default function Home() {
                   ease: "power3.out",
                   clearProps: "transform,opacity",
                 },
-              ),
+              )),
           }),
         );
       gsap.utils
@@ -150,7 +150,7 @@ export default function Home() {
             trigger: group,
             start: "top 86%",
             once: true,
-            onEnter: () =>
+            onEnter: () => self.add(() =>
               gsap.fromTo(
                 group.querySelectorAll(".type-mask > span"),
                 { yPercent: 110 },
@@ -161,7 +161,7 @@ export default function Home() {
                   ease: "power4.out",
                   clearProps: "transform",
                 },
-              ),
+              )),
           }),
         );
       gsap.utils
@@ -171,7 +171,7 @@ export default function Home() {
             trigger: media,
             start: index % 2 ? "top 92%" : "top 86%",
             once: true,
-            onEnter: () =>
+            onEnter: () => self.add(() =>
               gsap.fromTo(
                 media,
                 { clipPath: "inset(0 0 100% 0)" },
@@ -181,7 +181,7 @@ export default function Home() {
                   ease: "power4.out",
                   clearProps: "clipPath",
                 },
-              ),
+              )),
           }),
         );
       gsap.fromTo(
@@ -218,7 +218,7 @@ export default function Home() {
             </span>
           </h1>
           <div className="forma-hero-media">
-            <img src={asset("ridge.jpg")} alt="House on the Ridge in Alibaug" />
+            <img src={asset("ridge.jpg")} alt="House on the Ridge in Alibaug" fetchpriority="high" decoding="async" />
           </div>
           <p className="hero-detail">
             Spaces shaped around people,

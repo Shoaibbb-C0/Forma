@@ -1,4 +1,15 @@
 /* Secondary-page refinements. Hero rules live only in styles.css. */
+.skip-link { position: fixed; top: 12px; left: 12px; z-index: 100; padding: 12px 18px; background: var(--ink); color: var(--paper); transform: translateY(-150%); }
+.skip-link:focus { transform: none; }
+:focus-visible { outline: 2px solid currentColor; outline-offset: 5px; }
+main:focus { outline: none; }
+button, select { min-height: 44px; }
+.monograph-next h2 { overflow-wrap: anywhere; text-wrap: balance; }
+.catalogue-preview { pointer-events: none; }
+.architectural-form { scroll-margin-top: 100px; }
+.journal-list img { aspect-ratio: 4 / 3; }
+.article > img { aspect-ratio: 16 / 10; }
+.footer-grid a, .footer-bottom a { padding-block: 8px; }
 .catalogue-opening .editorial-title { margin-top: 0; }
 .monograph-narrative h2 { grid-column: 4 / 12; }
 .contact-cta { grid-template-columns: 1fr auto; }
