@@ -1,3 +1,4 @@
+import ArchitectureImage from "./ArchitectureImage";
 import React, { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -40,7 +41,7 @@ export function ProjectIndex({ records = projects }) {
     const number = String(projects.indexOf(project) + 1).padStart(2, "0");
     return <TransitionLink className="catalogue-row" key={project.slug} to={`/work/${project.slug}`}>
       <span className="row-index">{number}</span><h2>{project.title}</h2><span className="catalogue-sector">{project.sector}</span><span className="catalogue-year">{project.year}</span><span className="catalogue-arrow" aria-hidden="true">↗</span>
-      <div className="catalogue-preview" aria-hidden="true"><img src={asset(project.cover)} alt="" loading="lazy" /></div>
+      <div className="catalogue-preview" aria-hidden="true"><ArchitectureImage src={asset(project.cover)} alt="" loading="lazy" sizes="320px" /></div>
     </TransitionLink>;
   })}</div>;
 }

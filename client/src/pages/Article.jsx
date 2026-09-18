@@ -1,5 +1,6 @@
+import ArchitectureImage from "../components/ArchitectureImage";
 import React from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Page } from "../components/Layout";
 import NotFound from "./NotFound";
 import { articles, asset } from "../data/content";
@@ -13,7 +14,9 @@ export default function Article() {
         <p className="eyebrow">{article.date}</p>
         <h1>{article.title}</h1>
         <p className="lede">{article.excerpt}</p>
-        <img src={asset(article.cover)} alt="" />
+        <ArchitectureImage src={asset(article.cover)} alt="" loading="eager" />
+        {article.body.map((paragraph, index) => <p className="article-copy" key={index}>{paragraph}</p>)}
+        <Link className="folio-link" to="/journal">Back to journal <span>→</span></Link>
       </article>
     </Page>
   );

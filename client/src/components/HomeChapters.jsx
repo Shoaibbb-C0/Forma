@@ -1,3 +1,4 @@
+import ArchitectureImage from "./ArchitectureImage";
 import React from "react";
 import { Link } from "react-router-dom";
 import TransitionLink from "./TransitionLink";
@@ -43,7 +44,7 @@ export function MaterialInterlude() {
       </h2>
       <figure className="detail-image detail-image--one image-reveal">
         <TransitionLink to="/work/courtyard-house">
-          <img
+          <ArchitectureImage
             src={asset("court-2.jpg")}
             alt="Another view of Courtyard House"
             loading="lazy"
@@ -52,7 +53,7 @@ export function MaterialInterlude() {
       </figure>
       <figure className="detail-image detail-image--two image-reveal">
         <TransitionLink to="/work/house-on-the-ridge">
-          <img
+          <ArchitectureImage
             src={asset("ridge-2.jpg")}
             alt="Interior geometry of House on the Ridge"
             loading="lazy"
@@ -61,7 +62,7 @@ export function MaterialInterlude() {
       </figure>
       <figure className="detail-image detail-image--three image-reveal">
         <TransitionLink to="/work/common-ground">
-          <img
+          <ArchitectureImage
             src={asset("common-2.jpg")}
             alt="Daylight and shared spaces at Common Ground"
             loading="lazy"
@@ -72,14 +73,14 @@ export function MaterialInterlude() {
   );
 }
 
-export function Practice() {
+export function Practice({ title }) {
   return (
     <section className="practice-chapter" aria-labelledby="practice-heading">
       <span className="section-label">Practice</span>
       <h2 id="practice-heading" className="reveal-line">
-        A practice of
+        {title || <>A practice of
         <br />
-        <em>close attention.</em>
+        <em>close attention.</em></>}
       </h2>
       <div className="principle-rows">
         {principles.map(([title, copy], i) => (
@@ -144,7 +145,7 @@ export function Archive() {
             <span className="archive-year">{project.year}</span>
             <span aria-hidden="true">↗</span>
             <div className="archive-peek" aria-hidden="true">
-              <img src={asset(project.cover)} alt="" loading="lazy" />
+              <ArchitectureImage src={asset(project.cover)} alt="" loading="lazy" sizes="320px" />
             </div>
           </TransitionLink>
         ))}
@@ -164,7 +165,7 @@ export function StudioPreview() {
     >
       <span className="section-label">Studio</span>
       <div className="studio-fragment image-reveal">
-        <img
+        <ArchitectureImage
           src={asset("studio.jpg")}
           alt="A view into the Forma studio"
           loading="lazy"

@@ -1,3 +1,4 @@
+import ArchitectureImage from "../components/ArchitectureImage";
 import React from "react";
 import { Link } from "react-router-dom";
 import { Page, Intro } from "../components/Layout";
@@ -19,7 +20,7 @@ export default function Journal() {
         {articles.map((article) => (
           <article key={article.slug}>
             <Link to={`/journal/${article.slug}`}>
-              <img src={asset(article.cover)} alt="" loading="lazy" />
+              <ArchitectureImage src={asset(article.cover)} alt="" loading="lazy" />
               <p className="eyebrow">{article.date}</p>
               <h2>{article.title}</h2>
               <p>{article.excerpt}</p>

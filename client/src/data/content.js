@@ -106,6 +106,10 @@ export const articles = [
     date: "12.04.25",
     cover: "journal-1.jpg",
     excerpt: "What a space gives back when it leaves room for a day to unfold.",
+    body: [
+      "A room does not need to prescribe every moment spent in it. A shaded edge, a place to sit near a window, or a table with room for another chair can accommodate the small changes of an ordinary day. The useful question is what the space allows, rather than how many functions it contains.",
+      "Designing for that freedom asks for care with the basics: the direction of daylight, the path through a room, the distance between furniture and the feel of a surface under a hand. These decisions remain present long after the first impression. A slow room leaves its occupants room to choose their own pace.",
+    ],
   },
   {
     slug: "material-is-a-memory",
@@ -114,6 +118,10 @@ export const articles = [
     cover: "journal-2.jpg",
     excerpt:
       "A field note on tactility, repair and buildings that age with grace.",
+    body: [
+      "Materials record use. Timber changes colour, stone wears at an edge, and a handle becomes polished by repeated touch. These marks can belong to the life of a building when its materials and details are chosen with ageing in mind.",
+      "The question is practical as well as visual. Can a damaged part be repaired? Can a finish be renewed without replacing the whole surface? Are joints and edges made to withstand everyday use? Attention to these questions gives a material a role beyond its appearance in a photograph. It becomes something people can live with and care for over time.",
+    ],
   },
   {
     slug: "drawing-the-in-between",
@@ -122,5 +130,9 @@ export const articles = [
     cover: "journal-3.jpg",
     excerpt:
       "Why thresholds, terraces and shaded edges often hold the most life.",
+    body: [
+      "The transition between inside and outside is rarely just a line on a plan. A deep doorway offers shelter while someone waits. A terrace provides a place to pause before entering a room. A shaded edge can make the space beside a building useful at a different time of day.",
+      "These intermediate spaces deserve the same attention as enclosed rooms. Their depth, orientation and relationship to movement determine whether they invite people to linger or simply pass through. Thinking carefully about a threshold connects the building to its surroundings and makes arrival a more considered part of everyday life.",
+    ],
   },
 ];

@@ -112,6 +112,7 @@ Frontend:
 
 ```env
 VITE_API_URL=https://your-backend-domain.vercel.app/api
+VITE_SITE_URL=https://forma-beta-two.vercel.app
 ```
 
 Backend:
@@ -129,6 +130,16 @@ Local environment files are ignored by Git and must never be committed.
 The enquiry form validates submissions in the browser and on the server. It includes rate limiting and a hidden spam field.
 
 MongoDB must be connected for the API to confirm an enquiry. Without it, the API returns 503 and the form preserves the message with an email fallback. The server does not log personal enquiry details. Transactional email delivery is not configured.
+
+Production builds without a remote `VITE_API_URL` use a clearly labelled email-draft workflow. The visitor prepares a draft, opens their email app, and sends it themselves; the site never reports that a draft was delivered. Failed API submissions also offer a draft containing the visitor's message. For a same-origin API, explicitly set `VITE_ENQUIRIES_ENABLED=true` after configuring `/api/enquiries`. Localhost API values are used only during development.
+
+## Launch validation
+
+`npm run build` generates individual HTML metadata for all public routes, a sitemap, robots instructions and a noindex 404 page. Set `VITE_SITE_URL` to the final public origin before building for another domain. Vercel serves these generated routes directly and the generated `404.html` for unknown URLs; a catch-all homepage rewrite would defeat their metadata.
+
+Photography uses committed WebP variants with responsive source selection. Run `npm run media --prefix client` after changing JPG source assets. The existing fonts are self-hosted with their SIL Open Font License files.
+
+Run `npm test --prefix client` after the production build and `node --test server/tests/enquiries.test.js` for API behavior. For the browser matrix, install browser engines with `npx playwright install`, start `npm run preview --prefix client`, then run `npm run test:browser --prefix client`. `QA_BROWSERS=Chrome,Edge,Firefox,WebKit` selects available browsers; `QA_URL` and `QA_OUTPUT` override the preview origin and artifact directory. WebKit coverage is not native Safari or physical iOS testing. Detailed release evidence is in `PHASE_5_QA.md`.
 
 ## Content management
 

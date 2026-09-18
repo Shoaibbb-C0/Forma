@@ -21,7 +21,7 @@ export function Footer({ showLead = true }) {
       )}
       <div className="footer-grid">
         <Link className="logo" to="/">
-          Forma<sup>®</sup>
+          Forma
         </Link>
         <div>
           <small>Visit</small>
@@ -38,6 +38,7 @@ export function Footer({ showLead = true }) {
         <div>
           <small>Explore</small>
           <Link to="/work">Projects</Link>
+          <Link to="/studio">Studio</Link>
           <Link to="/journal">Journal</Link>
         </div>
       </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes, useLocation, useNavigationType } from "react-router-dom";
 import { useEffect, useLayoutEffect } from "react";
-import { routeMetadata } from "./data/metadata";
+import { routeMetadata, routeStructuredData } from "./data/metadata";
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Work from "./pages/Work";
@@ -24,10 +24,13 @@ function RouteEffects() {
     const previous = history.scrollRestoration;
     history.scrollRestoration = "manual";
     const position = navigation === "POP" ? positions.get(key) || 0 : 0;
-    window.scrollTo({ top: position, behavior: "instant" });
+    const restore = () => window.scrollTo({ top: position, behavior: "instant" });
+    restore();
+    const frame = requestAnimationFrame(restore);
     const main = document.querySelector("main");
     if (navigation !== "POP") main?.focus({ preventScroll: true });
     return () => {
+      cancelAnimationFrame(frame);
       positions.set(key, window.scrollY);
       history.scrollRestoration = previous;
     };
@@ -43,23 +46,22 @@ function RouteEffects() {
     }
     tag("description", meta.description);
     tag("robots", meta.robots);
-    for (const [name, value] of Object.entries({ title: meta.title, description: meta.description, image: new URL(meta.image, location.origin).href, url: location.href, type: meta.type, site_name: "FORMA" })) tag(`og:${name}`, value, true);
+    const origin = new URL(import.meta.env.VITE_SITE_URL || "https://forma-beta-two.vercel.app").origin;
+    const path = pathname.replace(/\/+$/, "") || "/";
+    for (const [name, value] of Object.entries({ title: meta.title, description: meta.description, image: new URL(meta.image, origin).href, url: new URL(path, origin).href, type: meta.type, site_name: "FORMA" })) tag(`og:${name}`, value, true);
     tag("twitter:card", "summary_large_image");
     tag("twitter:title", meta.title);
     tag("twitter:description", meta.description);
-    tag("twitter:image", new URL(meta.image, location.origin).href);
+    tag("twitter:image", new URL(meta.image, origin).href);
     let canonical = document.head.querySelector('link[rel="canonical"]');
     if (!canonical) { canonical = document.createElement("link"); canonical.rel = "canonical"; document.head.append(canonical); }
-    canonical.href = new URL(pathname, location.origin).href;
-  }, [pathname]);
-  useEffect(() => {
-    const main = document.querySelector("main");
-    if (!main || matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const animation = main.animate(
-      [{ opacity: 0, transform: "translateY(10px)" }, { opacity: 1, transform: "translateY(0)" }],
-      { duration: 650, easing: "cubic-bezier(.2,.7,.2,1)" },
-    );
-    return () => animation.cancel();
+    canonical.href = new URL(path, origin).href;
+    let schema = document.getElementById("route-schema");
+    const structured = routeStructuredData(path, origin);
+    if (structured) {
+      if (!schema) { schema = document.createElement("script"); schema.id = "route-schema"; schema.type = "application/ld+json"; document.head.append(schema); }
+      schema.textContent = JSON.stringify(structured);
+    } else schema?.remove();
   }, [pathname]);
   return null;
 }
@@ -86,7 +88,7 @@ function App() {
 }
 
 createRoot(document.getElementById("root")).render(
-  <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+  <BrowserRouter>
     <App />
   </BrowserRouter>,
 );

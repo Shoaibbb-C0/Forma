@@ -7,6 +7,9 @@ export default function Contact() {
   const request = useRef(null);
   const [status, setStatus] = useState("");
   const [state, setState] = useState("idle");
+  const [draft, setDraft] = useState("");
+  const configuredApi = import.meta.env.VITE_API_URL;
+  const apiAvailable = import.meta.env.DEV || import.meta.env.VITE_ENQUIRIES_ENABLED === "true" || (configuredApi && !/localhost|127\.0\.0\.1/.test(configuredApi));
   useEffect(() => () => request.current?.abort(), []);
 
   async function submit(event) {
@@ -17,6 +20,13 @@ export default function Contact() {
     if (form.get("website")) return;
     const payload = Object.fromEntries([...form].map(([key, value]) => [key, String(value).trim()]));
     if (!payload.name || !payload.message) { setState("error"); setStatus("Please include your name and a short project message."); return; }
+    const emailDraft = `mailto:hello@forma.studio?subject=${encodeURIComponent(`Project enquiry — ${payload.interest}`)}&body=${encodeURIComponent(`${payload.message}\n\n${payload.name}\n${payload.email}`)}`;
+    setDraft(emailDraft);
+    if (!apiAvailable) {
+      setState("draft");
+      setStatus("Your email draft is ready. Open it below, then send it from your email app. Your note has not been sent yet.");
+      return;
+    }
     const controller = new AbortController();
     request.current = controller;
     const timeout = setTimeout(() => controller.abort(), 15000);
@@ -29,6 +39,7 @@ export default function Contact() {
       const result = await response.json();
       if (result.ok !== true) throw new Error("Please email hello@forma.studio; your enquiry could not be confirmed.");
       formElement.reset();
+      setDraft("");
       setState("success");
       setStatus("Thank you. Your note has been received.");
     } catch (error) {
@@ -44,14 +55,15 @@ export default function Contact() {
   return <Page footerLead={false}><div ref={ref} className="contact-editorial-page">
     <section className="contact-editorial-opening"><span className="section-label">Contact</span><EditorialTitle lines={["Every place", "starts with", <em>a conversation.</em>]} /><p>Tell us about your project.</p></section>
     <section className="contact-editorial-body" aria-label="Contact Forma"><aside className="contact-coordinates"><div><span className="section-label">Email</span><a href="mailto:hello@forma.studio">hello@forma.studio ↗</a></div><div><span className="section-label">Studio</span><p>Mumbai, India<br />Visits by appointment</p></div></aside>
-      <form className="architectural-form" onSubmit={submit} aria-busy={state === "sending"}>
+      <form className="architectural-form" onSubmit={submit} onChange={() => { if (state !== "sending") { setDraft(""); setState("idle"); setStatus(""); } }} aria-busy={state === "sending"}>
         <label htmlFor="enquiry-name">Name<input id="enquiry-name" name="name" required maxLength={100} autoComplete="name" placeholder="Your name" /></label>
         <label htmlFor="enquiry-email">Email<input id="enquiry-email" type="email" name="email" required maxLength={160} autoComplete="email" placeholder="name@company.com" /></label>
         <label htmlFor="enquiry-interest">Project type<select id="enquiry-interest" name="interest"><option>New residential project</option><option>Commercial / hospitality project</option><option>Consultation booking</option><option>Press / collaboration</option></select></label>
         <label htmlFor="enquiry-message">Message<textarea id="enquiry-message" name="message" required maxLength={3000} rows={5} placeholder="Location, ambition, timing and scale." /></label>
         <input className="honeypot" aria-hidden="true" name="website" tabIndex={-1} autoComplete="off" />
-        <button className="enquiry-submit" type="submit" disabled={state === "sending"}>{state === "sending" ? "Sending enquiry…" : "Send enquiry"}<span aria-hidden="true">↗</span></button>
+        <button className="enquiry-submit" type="submit" disabled={state === "sending"}>{state === "sending" ? "Sending enquiry…" : apiAvailable ? "Send enquiry" : "Prepare email"}<span aria-hidden="true">↗</span></button>
         <p className={`enquiry-feedback enquiry-feedback--${state}`} role="status" aria-live="polite" aria-atomic="true">{status}</p>
+        {draft && state !== "sending" && <a className="folio-link" href={draft}>Open email draft <span aria-hidden="true">↗</span></a>}
       </form>
     </section>
   </div></Page>;

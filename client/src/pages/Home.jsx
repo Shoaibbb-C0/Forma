@@ -1,3 +1,4 @@
+import ArchitectureImage from "../components/ArchitectureImage";
 import React, { useLayoutEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { gsap } from "gsap";
@@ -43,15 +44,15 @@ function ProjectSpread({ project, index }) {
         to={`/work/${project.slug}`}
         aria-label={`View ${project.title}`}
       >
-        <img
+        <ArchitectureImage
           src={asset(project.cover)}
           alt={`${project.title}, ${project.location}`}
-          loading={index ? "lazy" : "eager"}
+          loading="lazy"
         />
       </TransitionLink>
       {(index === 1 || index === 3) && (
         <div className="folio-secondary image-reveal" aria-hidden="true">
-          <img src={asset(project.gallery[1])} alt="" loading="lazy" />
+          <ArchitectureImage src={asset(project.gallery[1])} alt="" loading="lazy" />
         </div>
       )}
       <p className="folio-premise">{project.premise}</p>
@@ -65,8 +66,8 @@ function ProjectSpread({ project, index }) {
 export default function Home() {
   const scope = useRef(null);
   useLayoutEffect(() => {
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches)
-      return undefined;
+    const preferences = gsap.matchMedia();
+    preferences.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
     const context = gsap.context((self) => {
       gsap
         .timeline({ defaults: { ease: "power4.out" } })
@@ -75,7 +76,6 @@ export default function Home() {
           duration: 1.15,
           stagger: 0.1,
         })
-        .from(".forma-hero-media", { opacity: 0, duration: 1 }, 0.2)
         .from(
           ".hero-detail",
           { y: 12, opacity: 0, duration: 0.7, stagger: 0.08 },
@@ -200,13 +200,15 @@ export default function Home() {
         },
       );
     }, scope);
-    return () => context.revert();
+      return () => context.revert();
+    });
+    return () => preferences.revert();
   }, []);
   return (
     <Page footerLead={false}>
       <div ref={scope} className="forma-home">
         <section className="forma-hero" aria-labelledby="hero-title">
-          <h1 id="hero-title" className="hero-monument">
+          <h1 id="hero-title" className="hero-monument" aria-label="FORMA — Architecture">
             <span className="hero-word">
               <span>FORMA</span>
             </span>
@@ -218,12 +220,12 @@ export default function Home() {
             </span>
           </h1>
           <div className="forma-hero-media">
-            <img src={asset("ridge.jpg")} alt="House on the Ridge in Alibaug" fetchpriority="high" decoding="async" />
+            <ArchitectureImage src={asset("ridge.jpg")} alt="House on the Ridge in Alibaug" loading="eager" sizes="(max-width: 650px) 100vw, 48vw" fetchPriority="high" decoding="async" />
           </div>
           <p className="hero-detail">
-            Spaces shaped around people,
+            Architecture and interiors.
             <br />
-            material and light.
+            Mumbai, India.
           </p>
         </section>
         <section id="studio-intro" className="manifesto">
@@ -240,8 +242,8 @@ export default function Home() {
               </span>
             </span>
           </h2>
-          <div className="manifesto-aside">
-            <Link className="folio-link" to="/studio">
+          <div className="manifesto-aside"><p>Residential and commercial spaces shaped around people, material and light.</p>
+            <Link className="folio-link" to="/work">Explore projects <span>→</span></Link><Link className="folio-link" to="/studio">
               Inside the studio <span>↗</span>
             </Link>
           </div>

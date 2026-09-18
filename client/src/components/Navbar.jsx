@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 
 const links = [
@@ -12,11 +12,11 @@ export default function Navbar() {
   const headerRef = useRef(null);
   const { pathname } = useLocation();
   useEffect(() => setOpen(false), [pathname]);
-  useEffect(() => {
+  useLayoutEffect(() => {
     document.body.classList.toggle("menu-open", open);
     return () => document.body.classList.remove("menu-open");
   }, [open]);
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!open) return undefined;
     const content = [...document.querySelectorAll("main, footer")];
     content.forEach((element) => {
@@ -57,7 +57,7 @@ export default function Navbar() {
   }, [open]);
   return (
     <header ref={headerRef} className={`site-header${open ? " is-open" : ""}`}>
-      <Link className="header-brand" to="/" aria-label="Forma home">
+      <Link className="header-brand" to="/" aria-label="Forma home" onClick={() => setOpen(false)}>
         FORMA
       </Link>
       <button
@@ -75,7 +75,7 @@ export default function Navbar() {
         aria-label="Primary navigation"
       >
         {links.map(([label, to], index) => (
-          <NavLink key={to} to={to}>
+          <NavLink key={to} to={to} onClick={() => setOpen(false)}>
             <span>{String(index + 1).padStart(2, "0")}</span>
             {label}
           </NavLink>

@@ -1,3 +1,4 @@
+import ArchitectureImage from "../components/ArchitectureImage";
 import React, { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { Page } from "../components/Layout";
@@ -32,12 +33,12 @@ export default function Project() {
       <EditorialTitle lines={titleLines[slug] || [project.title]} />
       <dl className="monograph-facts"><div><dt>Typology</dt><dd>{project.sector}</dd></div><div><dt>Location</dt><dd>{project.location}</dd></div><div><dt>Year</dt><dd>{project.year}</dd></div><div><dt>Scope</dt><dd>{project.scope}</dd></div></dl>
     </section>
-    <figure className="monograph-hero editorial-media"><img src={asset(project.cover)} alt={`${project.title} — ${project.location}`} fetchpriority="high" /></figure>
+    <figure className="monograph-hero editorial-media"><ArchitectureImage src={asset(project.cover)} alt={`${project.title} — ${project.location}`} loading="eager" fetchPriority="high" /></figure>
     <section className="monograph-narrative"><h2 className="editorial-reveal">{project.premise}</h2></section>
     <section className="monograph-spread" aria-label={`${project.title} photographic study`}>
-      {secondary && <figure className="monograph-detail editorial-media"><img src={asset(secondary)} alt={`Second photographic view of ${project.title}`} loading="lazy" /></figure>}
+      {secondary && <figure className="monograph-detail editorial-media"><ArchitectureImage src={asset(secondary)} alt={`Second photographic view of ${project.title}`} loading="lazy" /></figure>}
       <p className="monograph-spread-statement editorial-reveal">{project.accent}</p>
     </section>
-    <section className="monograph-next" aria-labelledby="next-project-heading"><div className="next-project-index"><span className="section-label">Next project</span><span>{nextNumber}</span><Link className="folio-link" to="/work">All projects <span>→</span></Link></div><TransitionLink className="next-project-composition" to={`/work/${next.slug}`}><h2 id="next-project-heading">{next.title}<span aria-hidden="true">↗</span></h2><div className="next-project-media"><img src={asset(next.cover)} alt={next.title} loading="lazy" /></div><span className="section-label">{next.sector} / {next.year}</span></TransitionLink></section>
+    <section className="monograph-next" aria-labelledby="next-project-heading"><div className="next-project-index"><span className="section-label">Next project</span><span>{nextNumber}</span><Link className="folio-link" to="/work">All projects <span>→</span></Link><Link className="folio-link" to="/studio">About the studio <span>↗</span></Link></div><TransitionLink className="next-project-composition" to={`/work/${next.slug}`}><h2 id="next-project-heading">{next.title}<span aria-hidden="true">↗</span></h2><div className="next-project-media"><ArchitectureImage src={asset(next.cover)} alt={next.title} loading="lazy" /></div><span className="section-label">{next.sector} / {next.year}</span></TransitionLink></section>
   </div></Page>;
 }
